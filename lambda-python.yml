@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Serverless Specification template describing lambda python function for Event-Driven-Python-AWS project.
+Resources:
+  dataExtraction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.8
+      CodeUri: ./dataExtraction/
+      Description: 'Python function to extract data from source'
+      MemorySize: 128
+      Timeout: 3
+      Tags:
+        Key: "project"
+        Value: "Event-Driven-Python-AWS"
+      Role: 'arn:aws:iam::018943110893:role/LambdaFullAccess'
+      Events:
+        dailyCheck:
+          Type: Schedule
+          Properties:
+            Schedule: cron(0 12 * * *) #run at noon everyday
+            Name: DailyCheck
+            Description: Scheduled event to run at noon everyday
+            Enabled: True
