@@ -13,7 +13,7 @@ exports.handler = (event, context, callback) => {
             var deaths = JSON.stringify(record.dynamodb.NewImage.Deaths.N);
             var recoveries = JSON.stringify(record.dynamodb.NewImage.Recoveries.N);
             var params = {
-                Subject: 'US Covid Data update',
+                Subject: 'Ontario Covid Data update',
                 Message: `Successfully processed ${event.Records.length} records. On ${date}, there were ${cases} cases, ${deaths} deaths, and ${recoveries} recoveries`,
                 TopicArn: 'arn:aws:sns:us-east-1:018943110893:NotifyMe'
             };

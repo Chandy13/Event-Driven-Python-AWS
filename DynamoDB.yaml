@@ -10,7 +10,7 @@ Resources:
       Code:
         S3Bucket: 'event-driven-python-aws-code'
         S3Key: 'index.js.zip'
-        S3ObjectVersion: 'sSlGwPXbXsyNqNIRYVs8pRIhyJyPGzD7' #Change this when making updates to code
+        S3ObjectVersion: '.G6_qTpULH7qDhTtYzUH5oYsS8mvGNx5' #Change this when making updates to code
       Handler: index.handler
       Role: 'arn:aws:iam::018943110893:role/LambdaFullAccess'
       Runtime: nodejs12.x
@@ -18,7 +18,7 @@ Resources:
       Tags: 
         - Key: 'Project'
           Value: 'Event-Driven Python'
-  USCOVIDDATA:
+  ONTARIOCOVIDDATA:
     Type: 'AWS::DynamoDB::Table'
     Properties: 
       AttributeDefinitions: 
@@ -28,7 +28,7 @@ Resources:
       KeySchema: 
         - AttributeName: 'Date'
           KeyType: 'HASH'
-      TableName: 'USCOVIDDATA'
+      TableName: 'ONTARIOCOVIDDATA'
       StreamSpecification:
         StreamViewType: NEW_AND_OLD_IMAGES
       Tags: 
@@ -40,7 +40,7 @@ Resources:
       BatchSize: 1
       Enabled: True
       EventSourceArn:
-        Fn::GetAtt: [ USCOVIDDATA , StreamArn ]
+        Fn::GetAtt: [ ONTARIOCOVIDDATA , StreamArn ]
       FunctionName:
         Fn::GetAtt: [ NotifyFunction , Arn ]
       StartingPosition: LATEST

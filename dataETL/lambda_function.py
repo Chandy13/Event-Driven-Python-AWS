@@ -11,7 +11,7 @@ def lambda_handler(event, context):
     for dataSet in dataManipulation():
         try:
             client.put_item( 
-                TableName = 'USCOVIDDATA',
+                TableName = 'ONTARIOCOVIDDATA',
                 Item = {
                     'Date' : {
                         'S' : dataSet[0]
@@ -44,5 +44,5 @@ def lambda_handler(event, context):
                 snsclient.publish(
                     TopicArn = 'arn:aws:sns:us-east-1:018943110893:NotifyMe',
                     Message = 'There is an error with the date being entered',
-                    Subject = 'US Covid Data table update error'
-                )           
+                    Subject = 'Ontario Covid Data table update error'
+                )          
