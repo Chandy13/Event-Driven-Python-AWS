@@ -31,6 +31,30 @@ def dataManipulation():
         for row in data_list:
             list_date.append(row[0])
 
+        #create list of cases
+        list_cases = []
+        for row in data_list:
+            list_cases.append(int(row[1]))
+        
+        #create list of new cases
+        list_new_cases = ['1']
+        case_counter = 1
+        while len(list_cases) > case_counter:
+            list_new_cases.append(str(list_cases[case_counter] - list_cases[case_counter - 1]))
+            case_counter += 1
+
+        #create list of deaths
+        list_deaths = []
+        for row in data_list:
+            list_deaths.append(int(row[2]))
+        
+        #create list of new deaths
+        list_new_deaths = ['0']
+        death_counter = 1
+        while len(list_deaths) > death_counter:
+            list_new_deaths.append(str(list_deaths[death_counter] - list_deaths[death_counter - 1]))
+            death_counter += 1
+
         #create date object
         date_obj_list = []
         for day in list_date:
@@ -45,11 +69,21 @@ def dataManipulation():
         for row in recovery_data_list:
             if row[1] == 'US':
                 list_recoveries.append(row[6])
+
+        #create list of new recoveries
+        list_new_recoveries = ['0']
+        recovery_counter = 1
+        while len(list_recoveries) > recovery_counter:
+            list_new_recoveries.append(str(int(list_recoveries[recovery_counter]) - int(list_recoveries[recovery_counter - 1])))
+            recovery_counter += 1
         
         #append recoveries to end of data list
-        counter = 0
-        while len(data_list) > counter:
-            data_list[counter].append(list_recoveries[counter])
-            counter += 1
+        final_counter = 0
+        while len(data_list) > final_counter:
+            data_list[final_counter].append(list_recoveries[final_counter])
+            data_list[final_counter].append(list_new_cases[final_counter])
+            data_list[final_counter].append(list_new_deaths[final_counter])
+            data_list[final_counter].append(list_new_recoveries[final_counter])
+            final_counter += 1
     
     return data_list

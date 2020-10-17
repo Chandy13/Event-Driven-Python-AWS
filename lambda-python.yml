@@ -19,7 +19,7 @@ Resources:
         dailyCheck:
           Type: Schedule
           Properties:
-            Schedule: cron(0 12 * * ? *) #run at noon everyday
+            Schedule: cron(0 16 * * ? *) #run at noon everyday
             Name: DailyCheck
-            Description: Scheduled event to run at noon everyday
+            Description: Scheduled event to run at noon (16:00 GMT) everyday
             Enabled: True

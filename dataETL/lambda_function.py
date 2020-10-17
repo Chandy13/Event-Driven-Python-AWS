@@ -1,24 +1,16 @@
 from dataManipulation import dataManipulation
 import boto3
 import botocore
-import json
 import time
 
 client = boto3.client('dynamodb')
 snsclient = boto3.client('sns')
 s3 = boto3.client('s3')
 
-jsondata = [] #empty dict for data entry
 def lambda_handler(event, context):
     for dataSet in dataManipulation():
-        entry = {}
-        entry['Date'] = {'S' : dataSet[0]}
-        entry['Cases'] = {'N' : dataSet[1]}
-        entry['Deaths'] = {'N' : dataSet[2]}
-        entry['Recoveries'] = {'N' : dataSet[3]}
-        jsondata.append(entry)
         try:
-            client.put_item( #add response = at beginning if function doesn't work
+            client.put_item( 
                 TableName = 'USCOVIDDATA',
                 Item = {
                     'Date' : {
@@ -32,6 +24,15 @@ def lambda_handler(event, context):
                     },
                     'Recoveries' : {
                         'N' : dataSet[3]
+                    },
+                    'New-Cases' : {
+                        'N' : dataSet[4]
+                    },
+                    'New-Deaths' : {
+                        'N' : dataSet[5]
+                    },
+                    'New-Recoveries' : {
+                        'N' : dataSet[6]
                     }
                 },
                 ExpressionAttributeNames = {'#date': 'Date'},
@@ -44,14 +45,4 @@ def lambda_handler(event, context):
                     TopicArn = 'arn:aws:sns:us-east-1:018943110893:NotifyMe',
                     Message = 'There is an error with the date being entered',
                     Subject = 'US Covid Data table update error'
-                )
-    s3.delete_object(
-        Bucket = 'event-driven-python-aws-code',
-        Key = 'DATA.json'
-    )            
-    time.sleep(1)
-    s3.put_object(
-        Bucket = 'event-driven-python-aws-code',
-        Body = json.dumps(jsondata),
-        Key = 'DATA.json'
-    )
+                )           
