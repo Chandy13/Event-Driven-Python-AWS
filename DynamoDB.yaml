@@ -10,7 +10,7 @@ Resources:
       Code:
         S3Bucket: 'event-driven-python-aws-code'
         S3Key: 'index.js.zip'
-        S3ObjectVersion: '.G6_qTpULH7qDhTtYzUH5oYsS8mvGNx5' #Change this when making updates to code
+        S3ObjectVersion: 'h13FULJRC7WKmPPwIPum74PuKdCRhR8m' #Change this when making updates to code
       Handler: index.handler
       Role: 'arn:aws:iam::018943110893:role/LambdaFullAccess'
       Runtime: nodejs12.x

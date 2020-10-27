@@ -1,7 +1,6 @@
 from dataManipulation import dataManipulation
 import boto3
 import botocore
-import time
 
 client = boto3.client('dynamodb')
 snsclient = boto3.client('sns')
