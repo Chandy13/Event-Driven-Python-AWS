@@ -44,12 +44,3 @@ Resources:
       FunctionName:
         Fn::GetAtt: [ NotifyFunction , Arn ]
       StartingPosition: LATEST
-  RedashInstance:
-    Type: AWS::EC2::Instance
-    Properties:
-      ImageId: 'ami-0d915a031cabac0e0'
-      InstanceType: 't2.small'
-      KeyName: 'Chandy'
-      Tags:
-        - Key: 'Project'
-          Value: 'Event-Driven Python'

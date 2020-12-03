@@ -1,0 +1,17 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+Description: 'Creates a EC2 instance for redash'
+Resources:  
+  RedashInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: 'ami-0d915a031cabac0e0'
+      InstanceType: 't2.small'
+      KeyName: 'Chandy'
+      Tags:
+        - Key: 'Project'
+          Value: 'Event-Driven Python'
+        - Key: 'Name'
+          Value: 'Redash Instance'
+        - Key: 'Schedule'
+          Value: 'eastern-office-hours'
