@@ -43,7 +43,7 @@ def dataManipulation():
         #create list of cases
         list_cases = []
         for row in data_list:
-            list_cases.append(int(row[1]))
+            list_cases.append(float(row[1]))
         
         #create list of new cases
         list_new_cases = ['1']
@@ -58,7 +58,7 @@ def dataManipulation():
             if row[2] == '':
                 list_deaths.append('0')
             else:
-                list_deaths.append(int(row[2]))
+                list_deaths.append(float(row[2]))
         
         #create list of new deaths
         list_new_deaths = ['0']
@@ -79,7 +79,7 @@ def dataManipulation():
         list_new_recoveries = ['0']
         recovery_counter = 1
         while len(list_recoveries) > recovery_counter:
-            list_new_recoveries.append(str(int(list_recoveries[recovery_counter]) - int(list_recoveries[recovery_counter - 1])))
+            list_new_recoveries.append(str(float(list_recoveries[recovery_counter]) - float(list_recoveries[recovery_counter - 1])))
             recovery_counter += 1
         
         #append new calculated lists to daily case
